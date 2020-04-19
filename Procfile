@@ -1,0 +1,1 @@
+web: gunicorn first_diagnosis_proj.wsgi --log-file -
