@@ -1,9 +1,9 @@
 from django.shortcuts import render
-from django.http import HttpResponseRedirect
+#from django.http import HttpResponseRedirect
 from django.core.files.storage import FileSystemStorage
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
-from PIL import Image
+#from PIL import Image
 from .forms import DiagnosisForm
 from .ml_model_k import run_diagnosis
 
@@ -22,9 +22,9 @@ def diagnosis(request):
             fs = FileSystemStorage()
             filename = fs.save(myfile.name, myfile)
             rfname, cfname, hfname = handle_uploaded_file(filename)
-            context['result'] = '/{}'.format(rfname)
-            context['chart'] = '/{}'.format(cfname)
-            context['heatmap'] = '/{}'.format(hfname)
+            context['result'] = '{}'.format(rfname)
+            context['chart'] = '{}'.format(cfname)
+            context['heatmap'] = '{}'.format(hfname)
             return render(request, "diagnosis/results.html", context)
     else:
         form = DiagnosisForm()
@@ -34,5 +34,8 @@ def diagnosis(request):
 
 def handle_uploaded_file(filename):
     rfname, cfname, hfname= run_diagnosis(filename,settings.MEDIA_ROOT)
+    rfname = rfname.split('/')[-1]
+    cfname = cfname.split('/')[-1]
+    hfname = hfname.split('/')[-1]
     return rfname, cfname, hfname
 

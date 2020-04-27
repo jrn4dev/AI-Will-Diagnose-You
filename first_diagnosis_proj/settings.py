@@ -25,7 +25,7 @@ SECRET_KEY = '5-d#*6s33c53cum+j^+!flij6*j694m+=88tw03qvrd$iorzxb'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['jrn.pythonanywhere.com']
 
 
 # Application definition
@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    #my apps 
+    #my apps
     'diagnosis_app',
 ]
 
@@ -122,23 +122,24 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 #additions
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media') 
+#MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT ='/var/www/static/media'
 MEDIA_URL = '/media/'
 
 LOGIN_REDIRECT_URL = '/'
 
 # Heroku settings
-if os.getcwd() == '/app':
-    import dj_database_url
-    DATABASES = {
-        'default': dj_database_url.config(default='postgres://localhost')
-    }
-    # Honor the 'X-Forwarded-Proto' header for request.is_secure().
-    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https') # Allow all host headers.
-    ALLOWED_HOSTS = ['*']
-        # Static asset configuration
-    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-    STATIC_ROOT = 'staticfiles' 
-    STATICFILES_DIRS = (
-        os.path.join(BASE_DIR, 'static'), 
-        )
+#if os.getcwd() == '/app':
+#    DATABASES = {
+#    import dj_database_url
+#        'default': dj_database_url.config(default='postgres://localhost')
+#    }
+#    # Honor the 'X-Forwarded-Proto' header for request.is_secure().
+#    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https') # Allow all host headers.
+#    ALLOWED_HOSTS = ['*']
+#        # Static asset configuration
+#    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+#    STATICFILES_DIRS = (
+#    STATIC_ROOT = 'staticfiles'
+#        os.path.join(BASE_DIR, 'static'),
+#        )

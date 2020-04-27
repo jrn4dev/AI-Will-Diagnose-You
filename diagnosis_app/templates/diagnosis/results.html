@@ -3,6 +3,7 @@
   Results
 {% endblock title %}
 {% block content %}
+{% load static %}
 <div class="container">
     <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
@@ -14,20 +15,19 @@
     <div class="row">
         <div class="col-md-4">
             <div class="thumbnail">
-                <img src={{result}} style="width:100%"  class="img-thumbnail">
+                <img src={% get_media_prefix %}{{result}} style="width:100%"  class="img-thumbnail">
                 <div class="caption">
-                <p>Results are based the above Xray</p>
+                <p>Predicted diagnosis is based on this uploaded X-ray</p>
                 </div>
             </a>
             </div>
         </div>
         <div class="col-md-4">
             <div class="thumbnail">
-                <img src={{heatmap}} style="width:100%" class="img-thumbnail">
+                <img src={% get_media_prefix %}{{heatmap}} style="width:100%" class="img-thumbnail">
                 <div class="caption">
                 <p>
-                    Activation heatmap showing areas that led to the scoring. 
-                    Please review hot regions of xray 
+                    This class activation heatmap shows which area of the image contributed most to the predicted diagnosis. Blue = low contribution, red = high contribution.
                 </p>
                 </div>
             </a>
@@ -35,9 +35,9 @@
         </div>
         <div class="col-md-4">
             <div class="thumbnail">
-                <img src={{chart}} style="width:100%" class="img-thumbnail">
+                <img src={% get_media_prefix %}{{chart}} style="width:100%" class="img-thumbnail">
                 <div class="caption">
-                <p>Probability scores for the different outcomes</p>
+                <p>Relative scores for each predicted outcome</p>
                 </div>
             </a>
             </div>

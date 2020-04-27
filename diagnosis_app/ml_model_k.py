@@ -11,24 +11,24 @@ import random
 from django.conf import settings
 
 MODEL_DIR = settings.BASE_DIR
-SAVE_DIR= 'media'
+SAVE_DIR= settings.MEDIA_ROOT
 MODEL_FILE = 'covid19_3class.h5.model'
 CLASSES = ['normal','covid','pneumonia']
-RESULT_CHART = 'chart.png' 
+RESULT_CHART = 'chart.png'
 RESULT_IMG = 'result.png'
 RESULT_HT = 'cam.png'
 
 def print_chart(prediction):
     chart_fname = unique_filename(RESULT_CHART)
-    pclasses = tuple(CLASSES) 
+    pclasses = tuple(CLASSES)
     y_pos = np.arange(len(pclasses))
     performance = prediction
-    
+
     plt.figure()
     plt.bar(y_pos, performance, align='center', alpha=0.5)
     plt.xticks(y_pos, pclasses)
     plt.ylabel('Percentage')
-    plt.title('Probabilities to have a pulmonar disease')
+    plt.title('Probabilities to have a pulmonary disease')
     plt.savefig(chart_fname)
     return chart_fname
 
@@ -68,7 +68,7 @@ def print_heatmap(model,img_path,index):
     cv2.imwrite(u_hfname, output_image)
 
     return u_hfname
-    
+
 def print_results(outcome):
     r_fname = unique_filename(RESULT_IMG)
     #img = Image.open(outcome["img_path"])
@@ -108,7 +108,7 @@ def predict_disease(img_path):
 def diagnosis_msg(ind):
     class_str = 'Covid 19, Pneumonia'
     switcher = {
-        'normal': "It is unlikely the patient has any of the following {}".format(class_str)
+        'normal': "It is unlikely the patient has any of the following: {}".format(class_str)
     }
     default = "It is likely the patient has  '{}'. We advice to see a doctor.".format(CLASSES[ind])
     return switcher.get(CLASSES[ind],default)
